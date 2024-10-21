@@ -8,6 +8,8 @@ import { Preferences } from '@capacitor/preferences';
 })
 export class PhotoService {
   public photos: UserPhoto[] =[];
+  private PHOTO_STORAGE: string = 'photos';
+
   constructor() { }
   private async savePicture(photo: Photo){
     const base64Data = await this.readAsBase64(photo);
@@ -49,11 +51,39 @@ export class PhotoService {
 
     const savedImageFile = await this.savePicture(capturedPhoto);
     this.photos.unshift(savedImageFile);
-    this.photos.unshift({
-      filepath:"soon...",
-      webviewPath:capturedPhoto.webPath!
+    // this.photos.unshift({
+    //   filepath:"soon...",
+    //   webviewPath:capturedPhoto.webPath!
+    // });
+
+    Preferences.set({
+      key: this.PHOTO_STORAGE,
+      value: JSON.stringify(this.photos),
     });
   }
+
+  public async loadSaved(){
+    //Retrieve cached photo array data
+    const {value} = await Preferences.get({key: this.PHOTO_STORAGE});
+    this.photos = (value ? JSON.parse(value): []) as UserPhoto[]; 
+  
+    //Display the photo by reading into base64 format
+    for(let photo of this.photos){
+      //Read each saved photo's data from the Filesystem
+      const readFile = await Filesystem.readFile({
+        path: photo.filepath,
+        directory: Directory.Data,
+      })
+
+      //Web platform only: Load the photo as base64 data
+      photo.webviewPath = `data:image/jpeg;base64,${readFile.data}`;
+    } 
+    
+  }
+
+
+
+
 }
 export interface UserPhoto{
   filepath: string;

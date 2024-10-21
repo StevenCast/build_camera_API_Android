@@ -1,17 +1,177 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>CV - Steven Castillo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [scrollEvents]="true" class="ion-padding">
+  
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-grid>
+    <ion-row>
+
+      <ion-col size="12" size-md="4" style="background-color: #232323; color: white;">
+        <div style="text-align: center; padding: 20px;">
+          <ion-avatar style="border: 5px solid white; width: 150px; height: 150px;">
+            <img src="../../assets/image/steven.jpeg" alt="https://ionicframework.com/docs/img/demos/avatar.svg">
+          </ion-avatar>
+        </div>
+
+        <h2 style="text-align: center; font-size: 1.5rem;">Steven Jahir Castillo Suqui</h2>
+
+        <ion-chip color="primary" style="width: 100%; justify-content: center;">Perfil</ion-chip>
+        <ion-item lines="none" style="background: transparent;">
+          <p>
+            Estudiante colaborador, honesto y sociable. Destaco en la creación de relaciones efectivas y trabajo en
+            equipo, aportando una actitud positiva y proactiva para contribuir al éxito de la organización.
+          </p>
+        </ion-item>
+
+        <ion-item lines="none" style="background: transparent;">
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+          <ion-label>0988326149</ion-label>
+        </ion-item>
+        <ion-item lines="none" style="background: transparent;">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-label>steven.castillo&#64;epn.edu.ec</ion-label>
+        </ion-item>
+        <ion-item lines="none" style="background: transparent;">
+          <ion-icon name="link-outline" slot="start"></ion-icon>
+          <a href="https://github.com/StevenCastillo">Github</a>
+        </ion-item>
+
+        <ion-chip color="primary" style="width: 100%; justify-content: center;">Idiomas</ion-chip>
+        <ion-item lines="none" style="background: transparent;">
+          <ion-label>Inglés (B1)</ion-label>
+        </ion-item>
+        <ion-item lines="none" style="background: transparent;">
+          <ion-label>Español</ion-label>
+        </ion-item>
+
+        <ion-chip color="primary" style="width: 100%; justify-content: center;">Competencias</ion-chip>
+        <ion-item>
+          <ion-label>Selecciona opciones</ion-label>
+          <ion-select [(ngModel)]="selectedOptions" multiple="true" placeholder="Seleccionar opciones" style="ion-select .select-text {
+            display: none;
+          }">
+            <ion-select-option *ngFor="let option of options" [value]="option">{{ option }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-list>
+          <ion-chip *ngFor="let option of selectedOptions">
+            <ion-label>{{ option }}</ion-label>
+            <ion-icon name="close-circle" (click)="removeOption(option)"></ion-icon>
+          </ion-chip>
+        </ion-list>
+
+
+      </ion-col>
+
+      <ion-col size="12" size-md="8" style="background-color: white; padding: 20px;">
+        <ion-chip color="secondary" style="width: 100%; justify-content: center;">Experiencia</ion-chip>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label>
+              <h3>Proyecto Datalake</h3>
+              <p>Extracción y limpieza de datos con Python (Pandas). Manipulación y creación de base de datos AWS
+                (DynamoDB - S3) y MySQL local.</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h3>Proyecto Gestión Formulario con Flask</h3>
+              <p>Colaboración en el desarrollo de backend con Flask y manipulación de bases de datos MySQL.</p>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h3>Sistema para Gestión de Productos</h3>
+              <p>Interfaz gráfica mediante Java Swing, creación de base de datos en CleverCloud.</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+        <ion-chip color="success" style="width: 100%; justify-content: center;">Educación</ion-chip>
+        <ion-item>
+  
+          <ion-button id="popover-button" style="width: 70%; height: 5%;">Instituciones</ion-button>
+        <ion-popover trigger="popover-button" [dismissOnSelect]="true">
+          <ng-template>
+            <ion-content>
+              <ion-list>
+                <ion-item [button]="true" id="nested-trigger1">Escuela Politécnica Nacional</ion-item>
+                <ion-item [button]="true" id="nested-trigger2">Unidad Educativa Gran Colombia</ion-item>
+                <ion-popover trigger="nested-trigger1" [dismissOnSelect]="true" side="end">
+                  <ng-template>
+                    <ion-content>
+                      <ion-list>
+                        <ion-item [button]="true" [detail]="false">Tecnología Superior en Desarrollo de
+                          Software - 4to Semestre</ion-item>
+                      </ion-list>
+                    </ion-content>
+                  </ng-template>
+                </ion-popover>
+
+                <ion-popover trigger="nested-trigger2" [dismissOnSelect]="true" side="end">
+                  <ng-template>
+                    <ion-content>
+                      <ion-list>
+                        <ion-item [button]="true" [detail]="false">Bachillerato General Unificado
+                        </ion-item>
+                      </ion-list>
+                    </ion-content>
+                  </ng-template>
+                </ion-popover>
+                
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+        </ion-item>
+
+        <ion-chip color="tertiary" style="width: 100%; justify-content: center;">Habilidades adicionales</ion-chip>
+        <ion-list lines="none">
+          
+          <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
+            <ion-item>
+              <ion-label> Entronos de Desarrollo: VSCode y
+                IntelliJ </ion-label>
+              <ion-reorder slot="end">
+                <ion-icon name="ellipse-outline"></ion-icon>
+              </ion-reorder>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label> Control de Versiones
+                (Git)
+                 </ion-label>
+              <ion-reorder slot="end">
+                <ion-icon name="ellipse-outline"></ion-icon>
+
+
+              </ion-reorder>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label> Base de Datos: Conocimientos de SQL y
+                NoSQL </ion-label>
+              <ion-reorder slot="end">
+                <ion-icon name="ellipse-outline"></ion-icon>
+
+
+              </ion-reorder>
+            </ion-item>
+        
+          </ion-reorder-group>
+
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
