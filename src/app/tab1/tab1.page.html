@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
       Calculadora
@@ -6,17 +6,35 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-input type="text" [(ngModel)]="display" readonly></ion-input>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col *ngFor="let btn of buttons" (click)="onButtonClick(btn)">
-        <ion-button expand="full">{{ btn }}</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content class="calculator-content">
+  <div class="calculator">
+    <ion-input type="text" [(ngModel)]="display" readonly></ion-input>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" *ngFor="let btn of buttons.slice(0, 4)" (click)="onButtonClick(btn)">
+          <ion-button expand="full">{{ btn }}</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="3" *ngFor="let btn of buttons.slice(4, 8)" (click)="onButtonClick(btn)">
+          <ion-button expand="full">{{ btn }}</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="3" *ngFor="let btn of buttons.slice(8, 12)" (click)="onButtonClick(btn)">
+          <ion-button expand="full">{{ btn }}</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="3" *ngFor="let btn of buttons.slice(12, 16)" (click)="onButtonClick(btn)">
+          <ion-button expand="full">{{ btn }}</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="3" *ngFor="let btn of buttons.slice(16,20)" (click)="onButtonClick(btn)">
+          <ion-button expand="full">{{ btn }}</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
